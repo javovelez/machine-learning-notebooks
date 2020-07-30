@@ -13097,13 +13097,23 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">regression__utils</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">regression__utils</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Given the function:</p>
+$$ \large
+    f(x)=x^3-3x^2+x+1+\epsilon
+$$
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -13135,7 +13145,44 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Algorithm">Algorithm<a class="anchor-link" href="#Algorithm">&#182;</a></h2><hr>
-
+$$ \large
+\vec{y}=\mathbf{X}\vec{\mathbf{\beta}}+\vec{\epsilon}
+$$<p>where $\large \mathbf{X}$ (or $\large \mathbf{V}$) is the <em>Vandermonde's matrix</em> of the independent variable, parametrised by the maximum degree $\large m$, a response vector $\large \vec{y}$, a parameter vector $\large \vec{\mathbf{\beta}}$ and a random error vector $\large \vec{\epsilon}$. In the form of a system of linear equations, we have:</p>
+$$ \large
+\begin{bmatrix}
+    y_1 \\
+    y_2 \\
+    y_3 \\
+    \vdots \\
+    y_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+    1 &amp; x_1 &amp; x_1^2 &amp;\cdots &amp; x_1^m \\
+    1 &amp; x_2 &amp; x_2^2 &amp; \cdots &amp; x_2^m \\
+    1 &amp; x_3 &amp; x_3^2 &amp; \cdots &amp; x_3^m \\
+    \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    1 &amp; x_n &amp; x_n^2 &amp; \cdots &amp; x_n^m
+\end{bmatrix}
+\begin{bmatrix}
+    \beta_1 \\
+    \beta_2 \\
+    \beta_3 \\
+    \vdots \\
+    \beta_m
+\end{bmatrix}
++
+\begin{bmatrix}
+    \epsilon_1 \\
+    \epsilon_2 \\
+    \epsilon_3 \\
+    \vdots \\
+    \epsilon_n
+\end{bmatrix}
+$$<p>By means of the Least Squares Method, the estimated coefficient vector is given by:</p>
+$$ \large
+\widehat{\vec{\mathbf{\beta}}}=(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\vec{y}
+$$
 </div>
 </div>
 </div>
@@ -13157,7 +13204,7 @@ div#notebook {
     <span class="k">return</span> <span class="n">wrap</span>
 
 <span class="k">class</span> <span class="nc">polynomialRegression</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_degree</span> <span class="o">=</span> <span class="n">degree</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_beta</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="nd">@property</span>
@@ -13180,6 +13227,14 @@ div#notebook {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Notice that our class has an attribute called <em>degree</em> which is the maximum degree of our function $\large f(x)$. In our example it should be $\large m=3$.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
