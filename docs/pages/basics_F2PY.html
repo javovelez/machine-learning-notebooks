@@ -13017,45 +13017,6 @@ ul.typeahead-list  > li > a.pull-right {
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
-<style type="text/css">
-    
-/* Temporary definitions which will become obsolete with Notebook release 5.0 */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-bold { font-weight: bold; }
-
-    </style>
 
 
 <style type="text/css">
@@ -13131,7 +13092,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13155,6 +13116,274 @@ div#notebook {
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="1.-Compilation">1. Compilation<a class="anchor-link" href="#1.-Compilation">&#182;</a></h1><hr>
+<p>A <em>Fortran</em> source file can have the name of the module. For example, given the source file <code>examples_f2py.f90</code> with a simple function which returns a string in bytes.</p>
+<div class="highlight"><pre><span></span><span class="k">function </span><span class="n">hello_f2py</span><span class="p">()</span> <span class="k">result</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="kd">::</span> <span class="n">output</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;Hello, F2PY!&quot;</span>
+<span class="k">end function </span><span class="n">hello_f2py</span>
+</pre></div>
+<p>The following step is the compilation, which is done by running the command:</p>
+
+<pre><code>$ f2py -m examples_f2py -c examples_f2py.f90</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">examples_f2py</span> <span class="kn">import</span> <span class="n">hello_f2py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hello_f2py</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>b&#39;Hello, F2PY!&#39;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="2.-Performance">2. Performance<a class="anchor-link" href="#2.-Performance">&#182;</a></h1><hr>
+<p>The following example, we will try to approximate the value $\large\pi$ with the idea of $\\tan^{-1}1=\frac{\pi}{4}$ using the power series of <em>arctan</em>, defined by:</p>
+$$\large
+4 \sum_{n=0}^{N}\frac{(-1)^n}{2n+1} \approx \pi
+$$<p>where $N$ tends to the infinity.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">pi_py</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">pi</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">pi</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">n</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pi_py</span><span class="p">(</span><span class="mi">1000000</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3.1415916535897743
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the same <em>Fortran</em> source file <code>examples_f2py.f90</code>, lets include the function and adapt it to be compiled.</p>
+<div class="highlight"><pre><span></span><span class="k">function </span><span class="n">pi_f2py</span><span class="p">(</span><span class="n">N_</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">N_</span><span class="p">,</span> <span class="n">n</span>
+    <span class="kt">real</span>    <span class="kd">::</span> <span class="n">pi</span>
+    <span class="n">pi</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">do </span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">N_</span>
+        <span class="n">pi</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">n</span><span class="o">/</span><span class="kt">real</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">end do</span>
+<span class="k">    </span><span class="n">pi</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">pi</span>
+<span class="k">end function </span><span class="n">pi_f2py</span>
+</pre></div>
+<p><em>p.s.: compile it again by running the command:</em></p>
+
+<pre><code>$ f2py -m examples_f2py -c examples_f2py.f90</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">examples_f2py</span> <span class="kn">import</span> <span class="n">pi_f2py</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Time measurement over the situations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[Python] pi_py |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">timeit</span> -n 5 -r 5 pi_py(1000000)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[F2PY] pi_f2py |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">timeit</span> -n 5 -r 5 pi_f2py(1000000)
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[Python] pi_py | 576 ms ± 3.33 ms per loop (mean ± std. dev. of 5 runs, 5 loops each)
+[F2PY] pi_f2py | 1.02 ms ± 11.1 µs per loop (mean ± std. dev. of 5 runs, 5 loops each)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="3.-Inline-fortran-source">3. Inline fortran source<a class="anchor-link" href="#3.-Inline-fortran-source">&#182;</a></h1><hr>
+<p>Build inline fortran commands and compile with <code>numpy.f2py</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fsource</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">recursive function factorial(x) result(output)</span>
+<span class="s1">    integer :: x, output</span>
+<span class="s1">    if (x &lt;= 1) then</span>
+<span class="s1">        output = 1</span>
+<span class="s1">    else</span>
+<span class="s1">        output = x*factorial(x - 1)</span>
+<span class="s1">    end if</span>
+<span class="s1">end function factorial</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">numpy.f2py</span>
+<span class="n">numpy</span><span class="o">.</span><span class="n">f2py</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="n">fsource</span><span class="p">,</span> <span class="n">modulename</span><span class="o">=</span><span class="s1">&#39;example_f2py&#39;</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="s1">&#39;.f90&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">example_f2py</span> <span class="kn">import</span> <span class="n">factorial</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3628800
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     </div>
   </div>
