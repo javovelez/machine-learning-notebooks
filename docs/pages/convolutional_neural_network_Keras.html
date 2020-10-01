@@ -13017,6 +13017,12 @@ ul.typeahead-list  > li > a.pull-right {
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
+<style type="text/css">
+    /* ! ************ */
+/* ! Custom style */
+/* ! ************ */
+
+    </style>
 
 
 <style type="text/css">
@@ -13084,7 +13090,7 @@ div#notebook {
 <li>Notebook: <a href="https://github.com/diegoinacio/machine-learning-notebooks/blob/master/Deep-Learning-Models/convolutional_neural_network_Keras.ipynb">convolutional_neural_network_Keras.ipynb</a></li>
 </ul>
 <hr>
-<p>Image classification using <em>Convolutional Neural Network</em> and Keras [using TensorFlow as a framework] library.</p>
+<p>Implementation of <em>Convolutional Neural Network</em> using Keras library.</p>
 
 </div>
 </div>
@@ -13098,7 +13104,7 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">matplotlib</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 </pre></div>
@@ -13208,7 +13214,7 @@ Y_test_oh: (20000, 10)
     <span class="n">rindex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">Y_train</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">rindex</span><span class="p">])</span>
     <span class="c1"># title label + one-hot</span>
-    <span class="n">title</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;{objects[Y_train[rindex][0]]} </span><span class="si">{Y_train[rindex]}</span><span class="s1"> :: &#39;</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">objects</span><span class="p">[</span><span class="n">Y_train</span><span class="p">[</span><span class="n">rindex</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">Y_train</span><span class="p">[</span><span class="n">rindex</span><span class="p">]</span><span class="si">}</span><span class="s1"> :: &#39;</span>
     <span class="n">title</span> <span class="o">+=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">e</span><span class="p">))</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">Y_train_oh</span><span class="p">[</span><span class="n">rindex</span><span class="p">]])</span> 
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
@@ -13424,7 +13430,7 @@ Epoch 10/10
     <span class="k">else</span><span class="p">:</span>
         <span class="n">imshow</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:,</span> <span class="o">-</span><span class="mi">4</span><span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imshow</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{objects[Y_]}</span><span class="s1"> (</span><span class="si">{Y_}</span><span class="s1">)&#39;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39; ; $A_i$ = </span><span class="si">{:.02f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">A_</span><span class="p">[</span><span class="n">Y_</span><span class="p">])),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">objects</span><span class="p">[</span><span class="n">Y_</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">Y_</span><span class="si">}</span><span class="s1">)&#39;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39; ; $A_i$ = </span><span class="si">{:.02f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">A_</span><span class="p">[</span><span class="n">Y_</span><span class="p">])),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 </pre></div>
 
     </div>

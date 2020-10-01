@@ -13017,6 +13017,12 @@ ul.typeahead-list  > li > a.pull-right {
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
+<style type="text/css">
+    /* ! ************ */
+/* ! Custom style */
+/* ! ************ */
+
+    </style>
 
 
 <style type="text/css">
@@ -13084,7 +13090,7 @@ div#notebook {
 <li>Notebook: <a href="https://github.com/diegoinacio/machine-learning-notebooks/blob/master/Deep-Learning-Models/perceptron_Keras.ipynb">perceptron_Keras.ipynb</a></li>
 </ul>
 <hr>
-<p>Perceptron or binary logistic regression algorithm using Keras [using TensorFlow as a framework] library and MNIST dataset.</p>
+<p>Implementation of <em>Perceptron</em> model using using Keras library.</p>
 
 </div>
 </div>
@@ -13303,7 +13309,7 @@ y_test: (2115, 1)
     <span class="n">loss_plot</span> <span class="o">+=</span> <span class="p">[</span><span class="n">e</span><span class="o">*</span><span class="mi">100</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]]</span>
     <span class="n">accA_plot</span> <span class="o">+=</span> <span class="p">[</span><span class="n">e</span><span class="o">*</span><span class="mi">100</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]]</span>
     <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">epoch</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;epoch: </span><span class="si">{epoch:04d}</span><span class="s1"> | loss: </span><span class="si">{loss_plot[-1]:.3f}</span><span class="s1"> | accuracy: </span><span class="si">{accA_plot[-1]:06.2f}</span><span class="s1"> %&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="si">:</span><span class="s1">04d</span><span class="si">}</span><span class="s1"> | loss: </span><span class="si">{</span><span class="n">loss_plot</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> | accuracy: </span><span class="si">{</span><span class="n">accA_plot</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">06.2f</span><span class="si">}</span><span class="s1"> %&#39;</span><span class="p">)</span>
 
 <span class="n">w_</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="c1"># store W and B for visualization and test</span>
 </pre></div>
