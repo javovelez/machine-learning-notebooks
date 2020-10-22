@@ -11,7 +11,7 @@ const utils = require("./utils");
 const PAGES_PATH = path.join(__dirname, "../pages/");
 
 function execute_action(answers, NOTEBOOKS) {
-  // ! Include all meta tags
+  // ! Include or remove all meta tags
   const _NOTEBOOKS = search.filter_notebooks(answers, NOTEBOOKS);
   // * Foreach notebook do ..
   _NOTEBOOKS.forEach((notebook) => {
@@ -45,18 +45,24 @@ function execute_action(answers, NOTEBOOKS) {
       head.removeChild(meta);
     });
 
+    let tags;
     if (answers.action === "Include") {
       // * Includes
-      let head = document.querySelector("head");
-      let tags = utils.generate_tags(notebook, bodyData);
+      tags = utils.generate_tags(notebook, bodyData);
       tags.splice(0, 0, "<!-- ! custom meta tags -->");
       tags.push("<!-- /! custom meta tags -->");
-      let joined_tags = tags.join(" ");
-      let elements = document
-        .createRange()
-        .createContextualFragment(joined_tags);
-      head.insertBefore(elements, head.childNodes[0]);
+    } else {
+      // * Removes
+      tags = [
+        "<!-- ! custom meta tags -->",
+        `<title>${bodyData.title}</title>`,
+        "<!-- /! custom meta tags -->",
+      ];
     }
+
+    let joined_tags = tags.join(" ");
+    let elements = document.createRange().createContextualFragment(joined_tags);
+    head.insertBefore(elements, head.childNodes[0]);
 
     utils.write_file(file, document, notebook);
   });
