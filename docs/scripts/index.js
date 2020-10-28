@@ -5,7 +5,7 @@ const chalk = require("chalk");
 // ! Imports
 const search = require("./search");
 const metatag = require("./metatag");
-// const style = require("./style");
+const style = require("./style");
 const navbar = require("./navbar");
 
 // * Get all notebooks and include the option --all
@@ -42,7 +42,7 @@ enquirer
         break;
       case "Style":
         // ! Style option selected
-        // todo pass
+        style.style_option(answers, NOTEBOOKS);
         break;
       case "Navbar":
         // ! Style option selected
